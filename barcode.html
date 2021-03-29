@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="PATH/dist/qcode-decoder.min.js"></script>
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+        <!-- <script src="bootstrap/js/style.js"></script> -->
+        
+        <link rel="stylesheet" href="barcode.css">
+        <title>Smart Doorlcok</title>
+        
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <script src="jquery-2.1.4.js"></script>
+        <script>
+            $(document).ready(function() {                
+
+            });
+            
+        
+        </script>
+</head>
+
+<body>
+    <div class="row"></div>
+    <div class="col" align="center">
+        <br>
+        <br>
+             <a href="index.html" class="btn btn-primary btn-lg t-no" id="keluar" role="button" aria-pressed="true">Sign Out</a>
+        
+    </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <br>
+        <br>
+    Scan QR Code untuk membuka Pintu:
+    <br>
+        <br>
+    <video id="preview"></video>
+    
+    
+    
+
+    <script>
+        var hasil_baca;
+        var kalimat,kalimat2;
+
+        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) { 
+        hasil_baca=content;
+        alert('hasil scan = '+hasil_baca);
+        //$('.t-no').show();
+        //writeData()
+        if(hasil_baca=="meja1"){
+            alert("code sama")
+        }
+        else{alert('Silahkan Scan Barcode untuk membuka');}
+        
+      });
+        
+        Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[3]);// 0 untuk kamera depan pada hp, dan 1 untuk kamera belakang pada hp
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+      
+     
+      
+   
+
+
+
+        // Your web app's Firebase configuration
+        var config = {
+            apiKey: "AIzaSyBYAhWov0O2w28AGHgYdZ65WRXwJiTvq9A",
+        authDomain: "doorlock-b2945.firebaseapp.com",
+        databaseURL: "https://doorlock-b2945.firebaseio.com",
+        projectId: "doorlock-b2945",
+        storageBucket: "doorlock-b2945.appspot.com",
+        messagingSenderId: "67836530887",
+        appId: "1:67836530887:web:683ed6317bf944cce6aee2",
+        measurementId: "G-G5T48TLY5W",
+        };
+        firebase.initializeApp(config);
+
+
+        
+
+        function getdata() {
+            var messagesRef = firebase.database();
+            var ref=messagesRef.ref("barcode");
+
+            ref.on("value",function(snapshot){
+                snapshot.forEach(function (childSnapshot){
+                    data=childSnapshot.val();
+                    console.log(data);
+                    kalimat=data;
+                    if(hasil_baca==kalimat){
+                        writeData()
+                    }
+                    else{alert('Silahkan Scan Barcode untuk membuka');}
+                });     
+            })     	
+            
+        }
+        
+
+
+
+
+    </script>
+</body>
+
+</html>

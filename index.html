@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>Smart Access Doorlock</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,600,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <div id="login_div" class="main-div">
+      <h3>Smart Doorlock</h3>
+      <input type="email" placeholder="Email..." id="email_field" />
+      <input type="password" placeholder="Password..." id="password_field" />
+
+      <button onclick="login()">Login to Account</button>
+      <br />
+      <button onclick="daftar()">New User</button>
+    </div>
+
+    <div id="user_div" class="loggedin-div">
+      <h1>WELCOME !!!</h1>
+
+      <p id="user_para">
+        Terima kasih sudah menggunakan Aplikasi Smart Doorlock
+      </p>
+      <button onclick="logout()">Logout</button>
+      <br />
+
+      <a href="barcode.html">MULAI APLIKASI</a>
+    </div>
+
+    <div id="user_div2" class="loggedin-div">
+      <h1>Register</h1>
+
+      <p id="user_para">Verifikasi Email Anda</p>
+
+      <button onclick="verifikasi()">Verifikasi Email</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBYAhWov0O2w28AGHgYdZ65WRXwJiTvq9A",
+        authDomain: "doorlock-b2945.firebaseapp.com",
+        databaseURL: "https://doorlock-b2945.firebaseio.com",
+        projectId: "doorlock-b2945",
+        storageBucket: "doorlock-b2945.appspot.com",
+        messagingSenderId: "67836530887",
+        appId: "1:67836530887:web:683ed6317bf944cce6aee2",
+        measurementId: "G-G5T48TLY5W",
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="index.js"></script>
+  </body>
+</html>
